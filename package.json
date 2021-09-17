@@ -1,0 +1,60 @@
+{
+  "name": "doc-hub",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "jest src --collect-coverage",
+    "build": "webpack"
+  },
+  "standard": {
+    "env": [
+      "jest"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@splunk/react-ui": "^3.2.0",
+    "babel-loader": "^8.1.0",
+    "bcrypt": "^3.0.4",
+    "body-parser": "^1.18.3",
+    "bootstrap": "^4.3.1",
+    "cookie-parser": "^1.4.3",
+    "deepmerge": "^4.2.2",
+    "dockerode": "^2.5.7",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "file-loader": "^6.0.0",
+    "fs-extra": "^7.0.1",
+    "generate-password": "^1.4.1",
+    "got": "^11.8.2",
+    "http-proxy-middleware": "^0.19.1",
+    "jquery": "^3.3.1",
+    "jsonwebtoken": "^8.4.0",
+    "ldapauth-fork": "^4.2.0",
+    "ldapts": "^1.4.2",
+    "lodash": "^4.17.11",
+    "nedb": "^1.8.0",
+    "popper.js": "^1.16.1",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.5",
+    "requestretry": "^3.1.0",
+    "saml2-js": "^3.0.1",
+    "styled-components": "^5.2.1",
+    "underscore": "^1.9.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "yaml": "^1.10.2",
+    "yn": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.1",
+    "jest": "^26.1.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "standard": "^14.3.4"
+  }
+}

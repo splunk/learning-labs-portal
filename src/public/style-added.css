@@ -1,0 +1,483 @@
+/*
+
+Styles for Common
+
+*/
+
+@font-face {
+    font-family: "Proxima-Nova";
+    src: url("./fonts/proxima-nova-regular-webfont.woff");
+    font-weight: normal;
+}
+@font-face {
+    font-family: "Proxima-Nova";
+    src: url("./fonts/proxima-nova-bold-webfont.woff");
+    font-weight: bold;
+}
+
+body {
+    margin-top: 45px;
+}
+
+.dochub h1 {
+    line-height: 1.2;
+    font-weight: 300;
+    font-size: 2rem;
+    margin: 30px 0 10px 0;
+}
+
+.dochub h2 {
+    font-size: 18px;
+}
+
+.dochub h3 {
+    font-family: "Splunk Platform Sans", "Proxima Nova", Roboto, Droid, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 6px;
+}
+
+.dochub h4 {
+    font-size: 12px;
+    margin: 6px;
+    color: grey;
+}
+
+.dochub p {
+    margin: 6px;
+    font-size: 13px;
+    flex: 1;
+    word-break: break-word;
+}
+
+/*
+
+Styles for Catalog / Track
+
+*/
+
+.doc-title a, 
+.doc-title a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+div.dochub-root {
+    padding : 20px;
+}
+
+div.dochub {
+    margin: 20px;
+    font-family: "Splunk Platform Sans", "Proxima Nova", Roboto, Droid, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.dochub .doc-title,
+.dochub .doc-footer {
+    display: flex;
+}
+
+.dochub .doc-body,
+.dochub .doc-title,
+.dochub .doc-footer {
+    padding: 0 10px;
+}
+
+.dochub .doc-body {
+    margin: 35px 0;
+}
+
+.dochub div.docs,
+.dochub ul.docs {
+    margin: 25px 0;
+}
+
+.dochub div.docs {
+    flex-direction: row;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: stretch;
+}
+
+.doc .content {
+    min-height: 160px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.content-link, .content, .tile-placeholder {
+    width: 200px;
+}
+
+.doc .footer {
+    padding-top:10px;
+    min-height: 30px;
+}
+
+.doc .content-track {
+    width: 300px;
+    min-height: 200px;
+    display: inline-block;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.doc .new-track-button {
+  justify-content: space-around;
+  align-items: center;
+}
+
+.dochub .doc:hover,
+.sortables .item:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px;
+}
+
+a.doc, div.doc, button.doc{
+    border: 1px solid rgb(225, 230, 235);
+    text-decoration: none;
+    margin: 10px;
+    display: flex;
+}
+
+a.menu, a.doc, button.doc {
+    color: #333;
+    outline: none;
+}
+
+button.doc {
+  background: none;
+  padding: 0px;
+}
+
+.workshop-edit i {
+    font-size: 20px;
+}
+
+.doc.locked:hover {
+    box-shadow: red 0px 4px 8px;
+}
+
+.doc .footer { 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-blocked a {
+    font-size: 13px;
+    color: darkslategrey;
+}
+
+.footer .stars {
+    display: flex;
+}
+
+.footer .fa.fa-star,
+.footer .fa.fa-star-o,
+.footer .fas.fa-star-half-alt,
+.footer .fas.fa-star,
+.footer .far.fa-star {
+    color : #ffbf00;
+    display: block;
+    font-size: 13px;
+}
+
+/*
+
+Styles for Track
+
+*/
+
+.track-title {
+    margin: 10px;
+    padding: 20px 15px 30px 20px;
+    background: #97999B;
+    border-radius: 10px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column
+}
+
+.track-title .title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.track-title h1 {
+    margin: 10px 6px 20px 6px;
+}
+
+.track-title h1,
+.track-title p,
+.track-title a {
+    color: white;
+}
+
+
+
+.track-title a:hover {
+    text-decoration: none;
+}
+
+/*
+
+Styles for Track Edit 
+
+*/
+
+.dochub .note {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.dochub .message {
+    display: inline-block;
+    margin: 20px 10px;
+}
+
+.dochub .content-link {
+    min-height: 160px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.content-link i {
+    font-size: 50px;
+    margin:10px 0 0 0 !important;
+}
+
+.tile-placeholder {
+    min-height: 160px;
+    border: 2px dotted black;
+    font-weight: bold;
+    font-size: 45px;
+    background-color: white;
+    margin: 10px;
+    float: left;
+}
+
+.sortables {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sortables .content,
+.sortables .content-link {
+    height: 160px !important;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sortables h3 {
+    font-size: 15px;
+}
+
+.sortables p {
+    margin: 6px;
+    font-size: 12px;
+    flex: 1;
+    word-break: break-word;
+}
+
+.sortables .item {
+    border: 1px solid rgb(225, 230, 235);
+    text-decoration: none;
+    color: #333;
+    margin: 10px;
+    float: left;
+}
+
+.sortables .close { 
+    top: -20px;
+    right: -12px;
+    position: relative;
+}
+
+.modal-workshop .modal-body {
+    display: flex;
+    justify-content: stretch;
+    flex-wrap: wrap;
+    max-height: 500px;
+    overflow: auto;
+}
+
+.modal-workshop .item {
+    width: 49%;
+    border: 1px solid rgb(225, 230, 235);
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    margin: 0.5%;
+    padding: 10px;
+}
+
+.modal-workshop .item:hover {
+    cursor:pointer;
+    border: 1px solid black;
+}
+
+.modal-workshop h3 {
+    font-size: 14px;
+}
+
+.modal-content.state-change p {
+    font-size: 16px;
+}
+
+.modal-content.state-change h3 {
+    font-size: 18px;
+}
+
+.modal-content.state-change h4 {
+    font-size: 16px;
+}
+
+.modal-workshop form {
+    width: 100%;
+    padding: 10px;
+}
+
+.tile-sortable-section {
+    background-color:#65A637;
+}
+
+.tile-section {
+    background-color:#65A637;
+    width: 100%;
+    border-radius: 10px
+}
+
+.tile-section:hover {
+    box-shadow: none !important;
+}
+
+.tile-section .content {
+    padding: 15px 20px;
+    width: 100%;
+    min-height: 80px !important;   
+}
+
+.tile-section p,
+.tile-sortable-section p,
+.tile-section h3,
+.tile-sortable-section h3 {
+    color: white;
+}
+/*
+
+Styles for Auth 
+
+*/
+.login-text {
+    color: #5cc05c;
+    font-family: sans-serif;
+    margin-left: -28px;
+    font-size : 30px;
+    vertical-align: -7%;
+}
+  
+.login-logo {
+    object-fit : cover;
+    height : 48px;
+    width : 150px;
+    margin-left: -23px;
+}
+
+body.auth {
+    background-color: black;
+    margin: 0px;
+    padding: 0px;
+}
+
+.auth .container {
+    margin-top : 210px;
+    width: 494px;
+}
+
+.auth .username {
+    border-color: black;
+    border-width: 1px;
+    border-radius: 5px 0 0 5px;
+    height: 36px;
+    width: 192px;
+    font-size: 13px;
+}
+
+.auth .password {
+    border-color: black;
+    border-width: 1px 0;
+    border-radius: 0;
+    height: 36px;
+    font-size: 13px;
+    width: 192px;
+}
+
+.auth .submit {
+    border-color: black;
+    border-width: 1px;
+    border-radius: 0 5px 5px 0;
+    height: 36px;
+    font-size: 13px;
+    width: 80px;
+    font-weight: bold;
+    background-color: #5cc05c;
+}
+
+.auth .submit-sso {
+    border-color: black;
+    border-width: 1px;
+    height: 36px;
+    font-size: 13px;
+    width: 100%;
+    font-weight: bold;
+    background-color: #5cc05c;
+}
+
+.auth .password:focus,
+.auth .username:focus {
+    outline-width: 0 !important;
+    box-shadow: none;
+}
+
+.auth .message {
+    color: white;
+    background-color: #171d21;
+    font-size : 14px;
+    line-height: 20px;
+    font-weight: 500;
+    margin-top : 20px;
+    padding : 20px;
+    border : 0;
+    text-align: center
+}
+
+/*
+
+Styles for Bootstrap overriding
+
+*/
+
+.dropdown-divider {
+    margin-top : 3px;
+    margin-bottom : 3px;
+}
+
+.nav-link {
+    font-family: "Proxima-Nova";
+    font-size: 13px;
+    font-weight: bold;
+}
+
+a:focus, button:focus{
+    outline: none;
+}

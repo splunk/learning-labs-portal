@@ -1,0 +1,26 @@
+<!--
+    When updating this template, update addTimeItem as well until we find a
+    solution that allows sychronizing templates between back-end and front-end
+
+    Probably want to switch to front-end side rendering eventually to avoid
+    template synchronization issues.
+-->
+<li class="item ui-state-default" _id="<%= _id %>" >
+    <%
+        let extraClass = '';
+        if (_id.includes('#')){
+            extraClass = 'tile-sortable-' + _id.split(':')[0].substr(1);
+        }
+    %>
+    <div class="content <%= extraClass %>">
+        <div class="body">
+            <button type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h3 class="tile-title"><%- title %></h3>
+            <p class="tile-desc"><%- description %></p>
+        </div>
+        <div class="footer">
+        </div>
+    </div>
+</li>

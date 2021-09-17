@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <%- include('head') %>
+    <body>
+        <%- include('navbar', {active:'track'}) %>
+        <div class="dochub-root">
+            <div class="dochub" track="<%= track._id %>">
+                <div class="doc-title">
+                    <h1>
+                        <a href="/track/<%= track._id %>/edit" class="menu">
+                            <i class="fa fa-backspace mr-2"></i>
+                        </a><!--
+                    --><span>Track > </span><!--
+                    --><span id="track-name"><%= track.name %></span><!--
+                    --><span> > Change Properties</span>
+                    </h1>
+                </div>
+                <form class="doc-body">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" 
+                            placeholder="Enter track name" value="<%= track.name %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea type="text" class="form-control" rows="5"
+                            placeholder="Enter track description"
+                            id="description"><%= track.description -%></textarea>
+                    </div>
+                </form>
+                <div class="doc-footer">
+                        <button id="button-save" class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <%- include('scripts') %>
+    <script>
+        //-------------------------------------------------------------
+        // Event Handlers
+        //-------------------------------------------------------------
+        async function saveChanges(){
+            const trackId = $('.dochub').attr('track');
+            const name = $('#name').val();
+            const description = $('#description').val();
+            const data = {
+                name: name,
+                description: description
+            };
+            if (updateTrack(trackId, data)){
+                $('#track-name').text(name);
+                addMessage('.doc-footer', 'Successfully updated changes.', 'success');
+            }
+            else {
+                addMessage('.doc-footer', 'Failed to update changes.', 'danger');
+            }
+        }
+
+        //-------------------------------------------------------------
+        // Main
+        //-------------------------------------------------------------
+        $( function() {
+            $('#button-save').click(saveChanges);
+        } );
+    </script>
+</html>

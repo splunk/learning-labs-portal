@@ -1,0 +1,8 @@
+auth:
+  urlPrefix: /auth
+  loginUrl: /auth
+  logoutUrl: /auth/logout
+services:
+  deployment: http://ws-svc/api/deployment
+  progress: http://ws-svc/api/progress
+  catalog: http://ws-svc/api/catalog

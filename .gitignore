@@ -1,0 +1,8 @@
+.DS_Store
+node_modules/
+mount/
+cert/
+secret/
+*.db
+deploy/*.retry
+coverage

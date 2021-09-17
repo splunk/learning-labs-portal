@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <%- include('head') %>
+    <body>
+        <%- include('navbar', {active:'track'}) %>
+        <div class="dochub-root">
+            <div class="dochub">
+                <div class="doc-title">
+                    <h1>
+                        <a href="/track/<%= track._id %>" class="menu">
+                            <i class="fa fa-backspace mr-2"></i>
+                        </a>
+                        <span>Track > <%= track.name %> > Configure</span>
+                    </h1>
+                </div>
+                <div class="docs">
+                    <% links.forEach((link) => { %>
+                        <%- include('tile_link', link) %>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+        <%- include('scripts') %>
+    </body>
+</html>

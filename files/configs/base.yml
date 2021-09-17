@@ -1,0 +1,26 @@
+auth:
+  urlPrefix: /auth
+  loginUrl: /auth
+  logoutUrl: /auth/logout
+  local:
+    loginUrl: /auth
+    saltRounds: 10
+    domain: localuser
+    admin:
+      username: admin
+      passwordPath: /mount/password
+  bitbucket:
+    enabled: false
+  token:
+    secretPath: /mount/jwt_secret
+    validationKey: VERSION1 #  Change this to invalidate tokens already issued.
+ssl:
+  enabled: false
+  certificatePath: /cert/server.cert
+  privateKeyPath: /cert/server.key
+services:
+  deployment: https://ws-svc/api/deployment
+  progress: https://ws-svc/api/progress
+  catalog: https://ws-svc/api/catalog
+httpsAgent:
+  ignoreSslWarnings: true

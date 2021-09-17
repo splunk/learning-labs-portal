@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <%- include('head') %>
+    <body>
+        <%- include('navbar', {active: 'catalog'}) -%>
+        <div class="dochub-root">
+            <div class="dochub">
+                <div class="doc-title">
+                    <h1><i class="fa fa-flask mr-2"></i>Workshops</h1>
+                </div>
+                <div class="docs">
+                    <% links.forEach((link) => { %>
+                        <%- include('tile_link', link) %>
+                    <% }); %>
+                    <% docs.forEach((doc) => { -%>
+                        <% doc.href = `/doc/${doc._id}/` -%>
+                        <%- include('tile', {doc: doc}) %>
+                    <% }); -%>
+                </div>
+            </div>
+        </div>
+        <script src="/catalog.js"></script>
+    </body>
+</html>

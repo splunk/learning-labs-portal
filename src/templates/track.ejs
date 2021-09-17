@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <%- include('head') %>
+    <body>
+        <%- include('navbar', {active:'track'}) %>
+        <div class="dochub-root">
+            <div class="dochub">
+                <div class="track-title">
+                    <div class="title">
+                        <h1><a href="/track"><i class="fa fa-list-ol mr-2"></i>Track > </a><%= track.name %></h1>
+                        <h1 class="track-links">
+                            <% links.forEach((link) => { %>
+                                <%- include('track_link', link) %>
+                            <% }); %>
+                        </h1>
+                    </div>
+                    <% 
+                        discList = track.description.split('\n');
+                    -%>
+                    <% discList.forEach((desc)=>{ %>
+                    <p><%= desc %></p>
+                    <% }); %>
+                </div>
+                <div class="docs mt-4">
+                    <% track.docs.forEach((doc) => { %>
+                        <% doc.href = `/doc/${doc._id}/?track=${track._id}` %>
+                        <% if (doc._id.includes('#')) { %>
+                        <%- include('tile_extra', {doc: doc}) %>
+                        <% } else { %>
+                        <%- include('tile', {doc: doc}) %>
+                        <% } %>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+        <%- include('scripts') %>
+        <%- include('script-requirement') %>
+        <script>
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            });
+        </script>
+    </body>
+</html>

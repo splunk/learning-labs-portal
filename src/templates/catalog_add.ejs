@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+    <%- include('head') %>
+    <body>
+        <%- include('navbar') %>
+        <div class="dochub-root">
+            <div class="dochub">
+                <h1>Add Workshop</h1>
+                <form method="post" action="/catalog/add">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" name="title" placeholder="Title" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" name="description" placeholder="Description" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Image</label>
+                        <input type="text" class="form-control" name="image" placeholder="Docker Image" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary submit">Add Workshop</button>
+                    <a class="btn btn-light" href="/" role="button">Cancel</a>
+                </form>
+                <% if (message) { %>
+                <div class="alert alert-danger message">
+                    <i class="fa fa-exclamation-circle"></i>
+                    <%= message %>
+                </div>
+                <% } %>
+            </div>
+        </div>
+        <%- include('scripts') %>
+    </body>
+</html>

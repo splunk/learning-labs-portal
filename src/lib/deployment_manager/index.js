@@ -1,0 +1,1 @@
+module.exports = require('./deployment_manager_local');

@@ -1,0 +1,6 @@
+auth:
+  urlPrefix: /auth
+  loginUrl: /auth
+  logoutUrl: /auth/logout
+ssl:
+  enabled: true

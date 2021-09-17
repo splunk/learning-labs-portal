@@ -1,0 +1,13 @@
+<%
+    extraClass = 'tile-' + doc._id.split(':')[0].substr(1);
+%>
+<div class="doc ui-state-default <%= extraClass %>" _id="<%= doc._id %>" >
+    <div class="content">
+        <div class="body">
+            <h3 class="tile-title"><%- doc.title %></h3>
+            <p class="tile-desc"><%- doc.description %></p>
+        </div>
+        <div class="footer">
+        </div>
+    </div>
+</div>

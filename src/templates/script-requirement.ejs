@@ -1,0 +1,9 @@
+<script>
+    $('.doc.locked').each(function(){ 
+        const elem = $(this); 
+        const id = elem.attr('id'); 
+        elem.click(()=>{ 
+            $('#modal-'+id).modal({show:true}); 
+        }); 
+    });
+</script>

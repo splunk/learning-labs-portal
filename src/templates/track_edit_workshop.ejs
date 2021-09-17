@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <%- include('head') %>
+    <body>
+        <%- include('navbar', {active:'track'}) %>
+        <div class="dochub-root">
+            <div class="dochub">
+                <div class="doc-title">
+                    <h1>
+                        <a href="/track/<%= track._id %>/edit" class="menu">
+                            <i class="fa fa-backspace mr-2"></i>
+                        </a>
+                        <span>Track > <%= track.name %> > Change Workshops</span>
+                    </h1>
+                </div>
+                <div class="doc-body">
+                    <div class="note alert alert-primary" role="alert">
+                        Drag and drop Workshop tiles to change the order.
+                    </div>
+                </div>
+                <ul class="docs sortables clearfix" track="<%= track._id %>">
+                    <%- include('tile_sortable_link', {text:'Add Workshop', icon:'fa-plus', id:'add-workshop'}); %>
+                    <%- include('tile_sortable_link', {text:'Add Section Header', icon:'fa-plus', id:'add-section-header'}); %>
+                    <% track.docs.forEach((doc) => { %>
+                        <%- include('tile_sortable_item', doc) %>
+                    <% }); %>
+                </ul>
+                <div class="doc-footer">
+                    <button id="button-save" class="btn btn-primary">Save Changes</button>
+                </div>
+                <div class="modal fade modal-workshop" id="modal-add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                    </div>
+                </div>
+        </div>
+        <%- include('scripts') %>
+        <%- include('script-jquery-ui') %>
+        <script>
+            //-------------------------------------------------------------
+            // Event Handlers
+            //-------------------------------------------------------------
+            async function saveChanges(){
+                const docsWithExtra = getTileIds();
+                const trackId = $('.sortables').attr('track');
+                const docs = docsWithExtra.filter((id) => {
+                    return !id.includes('#');
+                });
+                const extraItems = getExtraItems();
+                const data = { docs, docsWithExtra, extraItems};
+                if (updateTrack(trackId, data)){
+                    addMessage('.doc-footer', 'Successfully updated changes.', 'success');
+                }
+                else {
+                    addMessage('.doc-footer', 'Failed to update changes.', 'danger');
+                }
+            }
+
+            async function addSelectedItems(){
+                const selectedIds = getSelectedModalItems();
+                const items = (await getAllWorkshopsCached()).filter((item) => {
+                    return selectedIds.includes(item._id);
+                });
+                
+                items.forEach((item) => {
+                    addTileItem(item);
+                });
+                $('#modal-add').modal('hide');
+            }
+
+            async function showModalWorkshops(){
+                const workshopIds = getTileIds();
+                const items = (await getAllWorkshopsCached()).filter((item) => {
+                    const isPublished = item.state=='published';
+                    const isInTrack = workshopIds.includes(item._id)
+                    return !isInTrack && isPublished;
+                });
+                
+                const html = `
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="exampleModalLabel">Select Workshops to Add</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button id="button-add" type="button" class="btn btn-primary">Add Selected</button>
+                        </div>
+                    </div>`;
+                $('.modal-dialog').html(html);
+                items.forEach((item)=> {
+                    $('.modal-body').append(addModalSelectionItem(item));
+                });
+                $('#button-add').click(addSelectedItems);
+                $('#modal-add').modal('show');
+            }
+
+            async function addSectionHeader(){
+                const title = $('#section-title').val();
+                const desc = $('#section-desc').val();
+                const id = '#section:'+ title.toLowerCase().split(' ').join('_');
+                const item = {
+                    _id:id,
+                    title:title,
+                    description:desc,
+                }
+                addTileItem(item);
+                $('#modal-add').modal('hide');
+            }
+
+            async function showModalSectionHeader(){
+                const html = `
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="exampleModalLabel">Add Section Header</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="section-title">Section Title</label>
+                                    <input type="text" class="form-control" id="section-title" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="section-desc">Section Description</label>
+                                    <textarea class="form-control" rows="3" id="section-desc" />
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button id="button-add" type="button" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>`;
+                $('.modal-dialog').html(html);
+                $('#button-add').click(addSectionHeader);
+                $('#modal-add').modal('show');
+            }
+
+            //-------------------------------------------------------------
+            // Main
+            //-------------------------------------------------------------
+            $( function() {
+                $( ".sortables" ).sortable({
+                    items: "li.item:not(.fixed)",
+                    placeholder: "tile-placeholder",
+                    opacity: .8
+                });
+                $( ".sortables" ).disableSelection();
+                $(".sortables .close").click(function(){
+                    const $target = $(this).parents('li.item');
+                    $target.hide('slow', function(){ $target.remove(); });
+                });
+
+                // Show modal
+                $('#add-workshop').click(showModalWorkshops);
+                $('#add-section-header').click(showModalSectionHeader);
+
+                // Submit data
+                $('#button-save').click(saveChanges);
+            } );
+        </script>
+    </body>
+</html>

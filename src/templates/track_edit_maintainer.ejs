@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <%- include('head') %>
+    <body>
+        <%- include('navbar', {active:'track'}) %>
+        <div class="dochub-root">
+            <div class="dochub">
+                <div class="doc-title">
+                    <h1>
+                        <a href="/track/<%= track._id %>/edit" class="menu">
+                            <i class="fa fa-backspace mr-2"></i>
+                        </a>
+                        <span>Track > <%= track.name %> > Change Maintainers</span>
+                    </h1>
+                </div>
+                <ul class="docs sortables clearfix" track="<%= track._id %>">
+                    <%- include('tile_sortable_link', {text:'Add Maintainer', icon:'fa-plus', id:'add-maintainer'}); %>
+                    <% track.maintainer.forEach((user) => { %>
+                        <%- include('tile_sortable_item', {'title': user.name, 'description': user.email, '_id': user.email}) %>
+                    <% }); %>
+                </ul>
+                <div class="doc-footer">
+                    <button id="button-save" class="btn btn-primary">Save Changes</button>
+                </div>
+                <div class="modal fade modal-workshop" id="modal-add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="exampleModalLabel">Select Users to Add</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button id="button-add" type="button" class="btn btn-primary">Add Selected</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('scripts') %>
+        <script>
+            //-------------------------------------------------------------
+            // Event Handlers
+            //-------------------------------------------------------------
+            async function saveChanges(){
+                const maintainers = getTileIds();
+                const trackId = $('.sortables').attr('track');
+                const data = {maintainer: maintainers};
+                if (updateTrack(trackId, data)){
+                    addMessage('.doc-footer', 'Successfully updated changes.', 'success');
+                }
+                else {
+                    addMessage('.doc-footer', 'Failed to update changes.', 'danger');
+                }
+            }
+    
+            async function addSelectedItems(){
+                const selectedIds = getSelectedModalItems();
+                const items = (await getAllUsersCached()).filter((item) => {
+                    return selectedIds.includes(item.email);
+                }).map((user)=> {
+                    return {_id: user.email, title: user.name, description: user.email};
+                });
+                
+                items.forEach((item) => {
+                    addTileItem(item);
+                });
+                $('#modal-add').modal('hide');
+            }
+    
+            async function showModal(){
+                const userEmails = getTileIds();
+                const items = (await getAllUsersCached()).filter((item) => {
+                    return !userEmails.includes(item.email);
+                }).map((user)=>{
+                    return {_id: user.email, title: user.name, description: user.email};
+                })
+    
+                // Generate Selection Items
+                $('.modal-dialog .modal-body').empty();
+                items.forEach((item)=> {
+                    $('.modal-body').append(addModalSelectionItem(item));
+                });
+    
+                // Show Modal
+                $('#modal-add').modal('show');
+            }
+
+            //-------------------------------------------------------------
+            // Main
+            //-------------------------------------------------------------
+            $( function() {
+                $(".sortables .close").click(function(){
+                    const $target = $(this).parents('li.item');
+                    $target.hide('slow', function(){ $target.remove(); });
+                });
+                $('#add-maintainer').click(showModal);
+                $('#button-add').click(addSelectedItems);
+                $('#button-save').click(saveChanges);
+            } );
+        </script>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+    <%- include('head') %>
+    <body class="auth">
+        <div class="container">
+            <div class="header">
+                <img class="login-logo" src="/images/logo.png" />
+                <span class="login-text">go/workshop</span>
+            </div>
+            <form class="form-inline auth" action="<%= action %>" method="<%= method %>">
+                <% if (showSsoButton) { %>
+                <button type="submit" class="btn btn-success submit-sso">Sign In With SSO</button>
+                <% } else { %>
+                <input type="text" class="form-control username simplebox" name="username" placeholder="Username">
+                <input type="password" class="form-control password simplebox" name="password" placeholder="Password">
+                <button type="submit" class="btn btn-success submit">Sign In</button>
+                <% } %>
+            </form>
+            <% if (message) { %>
+            <div class="alert alert-dark message">
+                <% message.forEach((paragraph) => { %>
+                    <p><i class="fa fa-exclamation-circle mr-1"></i><%= paragraph %></p>
+                <% }); %>
+            </div>
+            <% } %>
+        </div>
+    </body>
+</html>
