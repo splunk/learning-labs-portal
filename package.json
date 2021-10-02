@@ -12,8 +12,8 @@
       "jest"
     ]
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Developers @ Splunk",
+  "license": "Apache 2.0",
   "dependencies": {
     "@splunk/react-ui": "^3.2.0",
     "babel-loader": "^8.1.0",
